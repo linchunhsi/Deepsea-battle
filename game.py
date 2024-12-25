@@ -144,7 +144,7 @@ for image in enemy_bullet_images:
 
 def draw_healthbar():
     h=player_health
-    fh=1500
+    fh=1000
     x=player_pos[0]
     y=player_pos[1]
     pygame.draw.rect(screen, RED, (x, y-20,70 , 10))

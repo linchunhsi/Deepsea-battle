@@ -200,15 +200,15 @@ def spawn_enemies(num_enemies):
         enemy_image=random.choice(enemy_images)
         if enemy_image == enemy_images[0]:  # 海盜1
             enemy_size = (70, 100)  # 海盜1的基準大小
-            bullet_cooldown = 40+30*(num_enemies-1)
+            bullet_cooldown = 40+30*(num_enemies+p-1)
             full_health=250  # 海盜1的 cooldown 比較長
         elif enemy_image == enemy_images[1]:  # 海盜2
             enemy_size = (55, 90)  # 海盜2的基準大小
-            bullet_cooldown = 50+30*(num_enemies-1)
+            bullet_cooldown = 50+30*(num_enemies+p-1)
             full_health=200  # 海盜2的 cooldown 比較短
         elif enemy_image == enemy_images[2]:  # 海盜3
             enemy_size = (50, 70)  # 海盜3的基準大小
-            bullet_cooldown = 35+30*(num_enemies-1)
+            bullet_cooldown = 35+30*(num_enemies+p-1)
             full_health=100
         enemy_image = pygame.transform.scale(enemy_image, enemy_size)
         enemy = {
@@ -228,8 +228,9 @@ def show_target():
 spawn_enemies(1)
 def update_cooldown():
     for enemy in enemies:
-        if enemy['boss']!=1:
-            enemy['bullet_cooldown']-=30
+            if enemy['boss']!=1:
+                 enemy['bullet_cooldown']-=30
+                 
 def calculate_angle_and_velocity(start_pos, target_pos,size):
     sizex,sizey=size
     dx = target_pos[0]+25-sizex/2 - start_pos[0]
@@ -399,13 +400,13 @@ def update_enemy_bullets():
             if player_mask.overlap(enemy_bullet_mask[bullet['type']], offset):
                 if bullet['type']==9 or bullet['type']==8 and player_health<1500:
                     for i in range(50):
-                        if player_health==1500:
+                        if player_health==1000:
                             break
                         player_health+=1
                 elif bullet['type']!=9 and bullet['type']!=8:
                     player_health -= 100
-                enemy['bullets'].remove(bullet)
-
+                if bullet in enemy['bullets']:
+                    enemy['bullets'].remove(bullet)
             screen.blit(bullet['image'], (bullet['x'], bullet['y']))
             
 

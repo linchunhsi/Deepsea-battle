@@ -58,7 +58,7 @@ player_size = (50, 100)
 player_pos = [100, HEIGHT // 2 - player_size[1] // 2]
 player_speed = 5
 player_bullets = []
-player_health = 1500
+player_health = 1000
 enemies = []
 sharks=[]
 shark_image=[]
@@ -378,12 +378,12 @@ def enemy_shoot():
                                 and enemy['pos'][1]+1*math.sin(theta) <=HEIGHT-120 and  enemy['pos'][1]+ 1*math.cos(theta)>=0 :           
                                 enemy['pos'][0]+=1*math.cos(theta)
                                 enemy['pos'][1]+=1*math.sin(theta)
-                        enemy['cooldown']=-random.randint(0,8)*(enemy['boss']-1)+enemy_count*(-enemy['boss'])
+                        enemy['cooldown']=-random.randint(0,8)*(enemy['boss']-1)+2
 
             
 
 def update_enemy_bullets():
-    global player_health
+    global player_health ,player_mask
     for enemy in enemies:
         for bullet in enemy['bullets'][:]:
             bullet['x'] += bullet['velocity_x']
@@ -445,7 +445,7 @@ def draw_start_screen():
 def reset_game():
     global player_pos, score, player_health, game_stage, enemies, sharks, player_mask, nshark,bubble_count
     # 重置遊戲狀態
-    player_health = 1500
+    player_health = 1000
     score = 0
     player_pos = [100, HEIGHT // 2 - player_size[1] // 2]
     game_stage = 1
@@ -474,8 +474,7 @@ def main():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:  # Press Enter to start the game
                         game_started = True
-                    if event.key == pygame.K_ESCAPE:  # Press Enter to start the game
-                        running=False
+                    
             pygame.time.wait(100)
         global player_mask
         screen.blit(background[1],(0,0))
@@ -496,7 +495,7 @@ def main():
                 reset_game()
                 end=0
             pygame.display.flip()
-        if score >= 5000:
+        if score >= 5000 and enemy_count==0:
             end=1
             enemies=[]
             screen.blit(background[3],(0,0))

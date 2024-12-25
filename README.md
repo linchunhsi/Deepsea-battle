@@ -24,9 +24,9 @@ Deepsea battle provides the following functionalities:
 Follow these steps to play Deepsea Battle:
 
 To play Deepsea Battle, follow these steps:
-1.download folder:Deepsea_Battle
+1.download all the files and put them in a folder
 2.open vscode 
-3.open folder:Deepsea_Battle make sure everything in the folder is downloaded
+3.open the folder you create and make sure everything in the folder is downloaded
 4.install pygame
 ```bash
 pip install pygame
@@ -107,5 +107,6 @@ The following modifications and enhancements were added to the project:
 3. Add item that has special effect
 4. Record highest score
 5. Able to play with people other than computer
+6. Allow enemy bullet to exsist after enemy is gone
 We encourage further modifications and look forward to community contributions to improve PyMemeMaker further.
 
